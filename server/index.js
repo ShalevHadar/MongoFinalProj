@@ -3,16 +3,20 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
+const userRoutes = require("./users/routes");
+const costsRoutes = require("./costs/routes");
 
 // initialize environment configuration
 dotenv.config();
 const port = process.env.PORT;
 const dbUrl = process.env.DB_PASS;
 
-// setup http middlewares
+// setup http middleware
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(userRoutes);
+app.use(costsRoutes);
 
 // create connection to db
 mongoose.connect(dbUrl, (err) => {
