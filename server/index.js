@@ -9,7 +9,7 @@ dotenv.config();
 const port = process.env.PORT;
 const dbUrl = process.env.DB_PASS;
 
-// setup http middleware
+// setup http middlewares
 const app = express();
 app.use(express.json());
 app.use(cors());
