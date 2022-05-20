@@ -1,5 +1,5 @@
 const express = require("express");
-const { createUser } = require("./user-helper");
+const { createUser, getUser } = require("./user-helper");
 const router = express.Router();
 
 router.post("/api/users/register", async (req, res) => {
@@ -14,6 +14,18 @@ router.post("/api/users/register", async (req, res) => {
       .json({ message: "cannot create the user" });
   }
 });
+
+router.get("/api/users/:id", async (req,res) => {
+  try {
+    const {id} = req.params;
+    const {user, items} = await getUser(id);
+    res.status(200).json({ message: "success" , user, items});
+  } catch (error) {
+    res
+      .status(409)
+      .json({ message: "cannot create the user" });
+  }
+})
 
 
 module.exports = router;

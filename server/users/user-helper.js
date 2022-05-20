@@ -1,3 +1,4 @@
+const { getAllItems } = require("../costs/cost-helper");
 const { UserModel } = require("./model");
 
 const createUser = async (data) => {
@@ -12,7 +13,17 @@ const createUser = async (data) => {
   await user.save();
 }
 
+const getUser = async (id) => {
+  const user = await UserModel.findOne({personal_id: id});
+  const items = await getAllItems();
+  if (!user || ! items) {
+    throw new Error('cant fetch')
+  }
+  return {user, items};
+}
+
 
 module.exports = {
   createUser,
+  getUser
   };

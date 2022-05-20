@@ -40,7 +40,13 @@ const deleteItem = async (data) => {
   
 };
 
+const getAllItems = async () => {
+  const items = await costModel.find();
+  return items;
+}
+
 module.exports = {
   createItem,
   deleteItem,
+  getAllItems
 };
