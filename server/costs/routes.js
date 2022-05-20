@@ -27,9 +27,10 @@ router.post("/api/costs/deleteItem", async (req, res) => {
   }
 });
 
-router.get("/api/costs", async (req, res) => {
+router.get("/api/costs/:id", async (req, res) => {
   try {
-    const items = await getAllItems();
+    const {id} = req.params;
+    const items = await getAllItems(id);
     res.status(200).json({ message: "item fetched", items });
   } catch (error) {
     res

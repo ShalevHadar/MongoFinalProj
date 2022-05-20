@@ -7,6 +7,7 @@ const createItem = async (data) => {
     description: data.description,
     price: data.price,
     category: data.category,
+    createdBy: data.personal_id
   });
 
   const user = await UserModel.updateOne(
@@ -40,8 +41,10 @@ const deleteItem = async (data) => {
   
 };
 
-const getAllItems = async () => {
-  const items = await costModel.find();
+const getAllItems = async (id) => {
+  const items = await costModel.find({
+    createdBy: id
+  });
   return items;
 }
 

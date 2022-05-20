@@ -70,6 +70,10 @@ function App() {
     setItems(itemsData);
   }
 
+  const renderedItems = items.map((item, index) => {
+    return item
+  })
+
   console.log(items);
 
   return (
@@ -94,15 +98,9 @@ function App() {
       <div>
       <table className='myTable'>
    <tbody>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Created</th>
-        <th>Delete</th>
-      </tr>
+      {user.personal_id ? 
+        renderedItems
+      : "no"}
       <tr>
         <th>Id</th>
         <th>Name</th>
