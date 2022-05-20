@@ -17,7 +17,8 @@ const userSchema = new mongoose.Schema({
   last_name: { type: String, required: true },
   birthday: { type: Date, required: true},
   marital_status: {type: String, enum:['Married', 'Single', 'Divorced', 'Widowed'], required: true},
-  items: [{type: mongoose.Types.ObjectId}]
+  items: [{type: mongoose.Types.ObjectId}],
+  sum: {type: Number, default: 0 ,required: true}
 
 });
 

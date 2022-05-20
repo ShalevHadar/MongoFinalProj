@@ -8,6 +8,7 @@ router.post("/api/costs/createItem", async (req, res) => {
     await createItem(data);
     res.status(201).json({ message: "item created" });
   } catch (error) {
+    console.log(error);
     res
       .status(409)
       .json({ message: "cannot create the item" });

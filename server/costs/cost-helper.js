@@ -11,9 +11,9 @@ const createItem = async (data) => {
 
   await item.save();
 
-  const user = await UserModel.findOneAndUpdate(
+  const user = await UserModel.updateOne(
     { personal_id: data.personal_id },
-    { $push: { items: item._id } }
+    {$push: { items: item._id }, $inc: {sum: item.price}}
   );
 
   if (!user) {
