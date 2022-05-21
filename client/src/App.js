@@ -211,19 +211,11 @@ function App() {
                 <p className="bold">Filter Dates:</p>
                 <label>From:</label>
                 <br />
-                <input
-                  type="date"
-                  id="start"
-                  name="trip-start"
-                />
+                <input type="date" id="start" name="trip-start" />
                 <br />
                 <label>To:</label>
                 <br />
-                <input
-                  type="date"
-                  id="end"
-                  name="trip-end"
-                />
+                <input type="date" id="end" name="trip-end" />
                 <br />
                 <br />
                 <input type="submit" value="Submit"></input>
@@ -249,6 +241,8 @@ function App() {
         ) : (
           ""
         )}
+        <br />
+        <br />
       </div>
     </div>
   );
