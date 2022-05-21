@@ -71,7 +71,18 @@ function App() {
   }
 
   const renderedItems = items.map((item, index) => {
-    return item
+    console.log(item);
+    return (
+      <tr>
+        <th>{item._id}</th>
+        <th>{item.name}</th>
+        <th>{item.category}</th>
+        <th>{item.description}</th>
+        <th>{item.price}</th>
+        <th>{item.createdAt}</th>
+        <th><button>Delete</button></th>
+      </tr>
+    )
   })
 
   console.log(items);
@@ -98,18 +109,18 @@ function App() {
       <div>
       <table className='myTable'>
    <tbody>
-      {user.personal_id ? 
-        renderedItems
-      : "no"}
       <tr>
         <th>Id</th>
         <th>Name</th>
         <th>Category</th>
         <th>Description</th>
         <th>Price</th>
-        <th>Created</th>
-        <th>Delete</th>
+        <th>CreatedAt</th>
+        <th>Action</th>
       </tr>
+      {user.personal_id ? 
+        renderedItems
+      : ""}
    </tbody>
    </table>
       </div>
