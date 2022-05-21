@@ -24,7 +24,6 @@ const createItem = async (data) => {
 };
 
 const deleteItem = async (data) => {
-
   const item = await costModel.findOneAndDelete({
     _id: data.id,
   });
@@ -32,12 +31,15 @@ const deleteItem = async (data) => {
   if (!item) {
     throw new Error("no such item");
   }
-
-  await UserModel.updateOne(
+  
+  const user = await UserModel.findOneAndUpdate(
     { personal_id: data.personal_id },
     { $pull: { items: data.id }, $inc: {sum: item.price*-1} }
   );
 
+  const items = await getAllItems(data.personal_id);
+
+  return {items, user, item};
   
 };
 

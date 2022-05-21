@@ -8,7 +8,6 @@ router.post("/api/costs/createItem", async (req, res) => {
     await createItem(data);
     res.status(201).json({ message: "item created" });
   } catch (error) {
-    console.log(error);
     res
       .status(400)
       .json({ message: "cannot create the item" });
@@ -18,8 +17,8 @@ router.post("/api/costs/createItem", async (req, res) => {
 router.post("/api/costs/deleteItem", async (req, res) => {
   try {
     const data = req.body;
-    await deleteItem(data);
-    res.status(201).json({ message: "item deleted" });
+    const {items, user, item} = await deleteItem(data);
+    res.status(200).json({ message: "item deleted", items, user, item });
   } catch (error) {
     res
       .status(400)

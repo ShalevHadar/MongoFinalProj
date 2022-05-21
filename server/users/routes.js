@@ -8,7 +8,6 @@ router.post("/api/users/register", async (req, res) => {
     await createUser(data);
     res.status(201).json({ message: "user created" });
   } catch (error) {
-    console.log(error);
     res
       .status(409)
       .json({ message: "cannot create the user" });
