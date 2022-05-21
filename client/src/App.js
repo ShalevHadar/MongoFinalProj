@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import axios from "axios";
 
 function App() {
@@ -25,6 +25,13 @@ function App() {
       createdAt: "",
     },
   ]);
+  const [item, setItem] = useState({
+    personal_id: "",
+    name: "",
+    description: "",
+    price: "",
+    category: "",
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -116,10 +123,19 @@ function App() {
     );
   });
 
-  const handleAddItem = (event) => {
-    console.log(event.target);
+  const handleAddItem = async (event) => {
     event.preventDefault();
+    const response = await axios.post(`${URL}costs/createItem`, {
+    personal_id: id,
+    name: event.target[0].value,
+    description: event.target[1].value,
+    price: event.target[2].value,
+    category: event.target[3].value
+    });
+    success()
+    console.log(response);
   };
+
 
   return (
     <div className="App">
@@ -132,7 +148,7 @@ function App() {
       </form>
       <p className="red">{error}</p>
       {user.first_name ? (
-        <div>
+        <div className="myForm">
           <p>Personal_id: {user.personal_id}</p>
           <p>First Name: {user.first_name}</p>
           <p>Last Nam: {user.last_name}</p>
@@ -143,40 +159,47 @@ function App() {
       ) : (
         ""
       )}
-      <div>
-        <button>All</button>
-        <button>Year</button>
-        <button>Month</button>
-      </div>
+      <br />
       <div>
         <div>
-          <form onSubmit={handleAddItem}>
-            <label for="fname">name:</label>
-            <br />
-            <input type="text" id="name" name="name" />
-            <br />
-            <label for="fname">description:</label>
-            <br />
-            <input type="text" id="description" name="description" />
-            <br />
-            <label for="fname">price:</label>
-            <br />
-            <input type="text" id="price" name="price" />
-            <br />
-            <label for="fname">category:</label>
-            <br />
-            <select name="cars" id="cars">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="opel">Opel</option>
-              <option value="audi">Audi</option>
-            </select>
-            <br />
-
-            <input type="submit" value="Submit"></input>
-          </form>
+          {user.first_name ? (
+            <>
+              <form onSubmit={handleAddItem} className="myForm">
+                <p className="bold">Add an item</p>
+                <label>name:</label>
+                <br />
+                <input type="text" id="name" name="name" />
+                <br />
+                <label>description:</label>
+                <br />
+                <input type="text" id="description" name="description" />
+                <br />
+                <label>price:</label>
+                <br />
+                <input type="text" id="price" name="price" />
+                <br />
+                <label>category:</label>
+                <br />
+                <select name="cars" id="cars">
+                  <option value="Food">Food</option>
+                  <option value="Health">Health</option>
+                  <option value="Housing">Housing</option>
+                  <option value="Sport">Sport</option>
+                  <option value="Education">Education</option>
+                </select>
+                <br />
+                <br />
+                <input type="submit" value="Submit"></input>
+                <br />
+                <br />
+              </form>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </div>
+      <br />
       <div>
         {user.personal_id ? (
           <>
