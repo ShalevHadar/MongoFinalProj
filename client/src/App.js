@@ -1,5 +1,5 @@
 import "./App.css";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 function App() {
@@ -126,16 +126,19 @@ function App() {
   const handleAddItem = async (event) => {
     event.preventDefault();
     const response = await axios.post(`${URL}costs/createItem`, {
-    personal_id: id,
-    name: event.target[0].value,
-    description: event.target[1].value,
-    price: event.target[2].value,
-    category: event.target[3].value
+      personal_id: id,
+      name: event.target[0].value,
+      description: event.target[1].value,
+      price: event.target[2].value,
+      category: event.target[3].value,
     });
-    success()
+    success();
     console.log(response);
   };
 
+  const handleDates = async () => {
+    console.log("filter");
+  };
 
   return (
     <div className="App">
@@ -203,6 +206,31 @@ function App() {
       <div>
         {user.personal_id ? (
           <>
+            <div>
+              <form onSubmit={handleDates}>
+                <p className="bold">Filter Dates:</p>
+                <label>From:</label>
+                <br />
+                <input
+                  type="date"
+                  id="start"
+                  name="trip-start"
+                />
+                <br />
+                <label>To:</label>
+                <br />
+                <input
+                  type="date"
+                  id="end"
+                  name="trip-end"
+                />
+                <br />
+                <br />
+                <input type="submit" value="Submit"></input>
+                <br />
+                <br />
+              </form>
+            </div>
             <table className="myTable">
               <tbody>
                 <tr>
