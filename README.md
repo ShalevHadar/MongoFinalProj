@@ -24,4 +24,6 @@ with the following details:
 - "birthday": `date in format - 1\1\1`,
 - "marital_status": `enum in format: 'Married', 'Single', 'Divorced', 'Widowed'`
 
-### `Enjoy !`
+![Screenshot 2022-06-18 151304](https://user-images.githubusercontent.com/76647060/174437091-f46d9d35-451c-40ac-b1be-9eb8b79f1862.png)
+
+### `Enjoy and user the project`
