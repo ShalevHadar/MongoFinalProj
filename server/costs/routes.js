@@ -1,5 +1,5 @@
 const express = require("express");
-const { createItem, deleteItem, getAllItems } = require("./cost-helper");
+const { createItem, deleteItem, getAllItems, getItemsByDatesAndId } = require("./cost-helper");
 const router = express.Router();
 
 router.post("/api/costs/createItem", async (req, res) => {
@@ -35,6 +35,18 @@ router.get("/api/costs/:id", async (req, res) => {
     res
       .status(400)
       .json({ message: "cannot fetch all" });
+  }
+});
+
+router.post("/api/costs/sortby", async (req, res) => {
+  try {
+    const {startDate, endDate, id} = req.body;
+    const items = await getItemsByDatesAndId(startDate, endDate, id); 
+    res.status(200).json({ message: "items  fetched", items });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "cannot items by date" });
   }
 });
 

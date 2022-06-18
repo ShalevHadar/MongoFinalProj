@@ -50,8 +50,36 @@ const getAllItems = async (id) => {
   return items;
 }
 
+const getItemsByDatesAndId = async (start, end, id) => {
+  let newDateEnd;
+
+  if (start === end) {
+    var current = new Date(start);
+    newDateEnd = new Date(current.getTime() + 86400000);
+  } else {
+    newDateEnd = new Date(end);
+  }
+
+  const newDateStart = new Date(start);
+  const newStart = newDateStart.toISOString();
+  const newEnd = newDateEnd.toISOString();
+
+  const items = await costModel.find({
+    $and: [ 
+      {createdAt: {
+      $gte: newStart,
+      $lt: newEnd
+    }}, 
+    {createdBy: id}
+  ]
+  })
+
+  return items;
+};
+
 module.exports = {
   createItem,
   deleteItem,
-  getAllItems
+  getAllItems,
+  getItemsByDatesAndId
 };

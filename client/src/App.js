@@ -33,6 +33,7 @@ function App() {
     category: "",
   });
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
     id.length !== 9 || isNaN(id)
@@ -133,11 +134,16 @@ function App() {
       category: event.target[3].value,
     });
     success();
-    console.log(response);
   };
 
-  const handleDates = async () => {
-    console.log("filter");
+  const handleDates = async (event) => {
+    event.preventDefault();
+    const response = await axios.post(`${URL}costs/sortby`, {
+      startDate: event.target[0].value,
+      endDate: event.target[1].value,
+      id
+    });
+    makeItems(response.data.items);
   };
 
   return (
