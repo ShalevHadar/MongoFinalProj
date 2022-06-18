@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./users/routes");
 const costsRoutes = require("./costs/routes");
+const app = express();
 
 // initialize environment configuration
 dotenv.config();
@@ -12,7 +13,6 @@ const port = process.env.PORT;
 const dbUrl = process.env.DB_PASS;
 
 // setup http middleware
-const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(userRoutes);

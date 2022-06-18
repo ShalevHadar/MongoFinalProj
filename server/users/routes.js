@@ -2,6 +2,7 @@ const express = require("express");
 const { createUser, getUser } = require("./user-helper");
 const router = express.Router();
 
+// register a user
 router.post("/api/users/register", async (req, res) => {
   try {
     const data = req.body;
@@ -14,6 +15,7 @@ router.post("/api/users/register", async (req, res) => {
   }
 });
 
+// get user by id
 router.get("/api/users/:id", async (req,res) => {
   try {
     const {id} = req.params;

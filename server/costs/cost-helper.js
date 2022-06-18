@@ -1,6 +1,8 @@
 const { UserModel } = require("../users/model");
 const { costModel } = require("./model");
 
+
+// create item handler
 const createItem = async (data) => {
   const item = new costModel({
     name: data.name,
@@ -15,10 +17,6 @@ const createItem = async (data) => {
     {$push: { items: item._id }, $inc: {sum: item.price}}
   );
 
-  if (!user) {
-    throw new Error("no such user");
-  }
-
   await item.save();
   
 };
@@ -27,16 +25,11 @@ const deleteItem = async (data) => {
   const item = await costModel.findOneAndDelete({
     _id: data.id,
   });
-
-  if (!item) {
-    throw new Error("no such item");
-  }
   
   const user = await UserModel.findOneAndUpdate(
     { personal_id: data.personal_id },
     { $pull: { items: data.id }, $inc: {sum: item.price*-1} }
   );
-
   const items = await getAllItems(data.personal_id);
 
   return {items, user, item};
@@ -73,7 +66,7 @@ const getItemsByDatesAndId = async (start, end, id) => {
     {createdBy: id}
   ]
   })
-
+  
   return items;
 };
 

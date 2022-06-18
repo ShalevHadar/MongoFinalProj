@@ -2,6 +2,7 @@ const express = require("express");
 const { createItem, deleteItem, getAllItems, getItemsByDatesAndId } = require("./cost-helper");
 const router = express.Router();
 
+// create item route
 router.post("/api/costs/createItem", async (req, res) => {
   try {
     const data = req.body;
@@ -14,6 +15,7 @@ router.post("/api/costs/createItem", async (req, res) => {
   }
 });
 
+// delete item route
 router.post("/api/costs/deleteItem", async (req, res) => {
   try {
     const data = req.body;
@@ -26,6 +28,7 @@ router.post("/api/costs/deleteItem", async (req, res) => {
   }
 });
 
+// get all items by personal id route
 router.get("/api/costs/:id", async (req, res) => {
   try {
     const {id} = req.params;
@@ -38,6 +41,7 @@ router.get("/api/costs/:id", async (req, res) => {
   }
 });
 
+// get items by start and end date route
 router.post("/api/costs/sortby", async (req, res) => {
   try {
     const {startDate, endDate, id} = req.body;

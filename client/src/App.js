@@ -5,6 +5,7 @@ import axios from "axios";
 function App() {
   const URL = `http://localhost:3030/api/`;
 
+  // states
   const [id, setId] = useState("");
   const [error, setError] = useState("");
   const [user, setUser] = useState({
@@ -34,17 +35,22 @@ function App() {
   });
 
 
-  const handleSubmit = (event) => {
+  // handleFunctions
+
+  // personal Id verification
+  const handlePersonalIdubmit = (event) => {
     event.preventDefault();
     id.length !== 9 || isNaN(id)
       ? setError("Personal Id Should be 9 numbers only")
       : success();
   };
 
+  // personal Id state change
   const handleChange = (event) => {
     setId(event.target.value);
   };
 
+  // get user by id
   const success = async () => {
     setError("");
     const response = await axios.get(`${URL}users/${id}`);
@@ -60,11 +66,13 @@ function App() {
     }
   };
 
+  // set user and set items
   const handleStates = (response) => {
     makeUser(response.data.user);
     makeItems(response.data.items);
   };
 
+  // set user details
   const makeUser = (userData) => {
     setUser((prevState) => {
       let newUser = Object.assign({}, prevState.user);
@@ -78,10 +86,12 @@ function App() {
     });
   };
 
+  // set items details
   const makeItems = (itemsData) => {
     setItems(itemsData);
   };
 
+  // delete item route
   const deleteItem = async (itemId, personalId) => {
     const response = await axios.post(`${URL}costs/deleteItem`, {
       id: itemId,
@@ -106,6 +116,7 @@ function App() {
     makeItems(response.data.items);
   };
 
+  // show items by user
   const renderedItems = items.map((item, index) => {
     return (
       <tr key={item._id}>
@@ -124,6 +135,8 @@ function App() {
     );
   });
 
+
+  // adding item
   const handleAddItem = async (event) => {
     event.preventDefault();
     const response = await axios.post(`${URL}costs/createItem`, {
@@ -133,9 +146,13 @@ function App() {
       price: event.target[2].value,
       category: event.target[3].value,
     });
-    success();
+    if (response.data.message === 'item created'){
+      success();
+    }
+    
   };
 
+  // handle start and end date
   const handleDates = async (event) => {
     event.preventDefault();
     const response = await axios.post(`${URL}costs/sortby`, {
@@ -149,7 +166,7 @@ function App() {
   return (
     <div className="App">
       <h1>Async final project</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handlePersonalIdubmit}>
         <label>
           Personal ID: <input type="text" onChange={handleChange} />
         </label>

@@ -16,7 +16,7 @@ const createUser = async (data) => {
 const getUser = async (id) => {
   const user = await UserModel.findOne({personal_id: id});
   const items = await getAllItems(id);
-  if (!user || ! items) {
+  if (!user) {
     throw new Error('cant fetch')
   }
   return {user, items};
