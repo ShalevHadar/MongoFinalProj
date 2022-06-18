@@ -17,10 +17,11 @@
 
 With postman, create a user using the route: `.../api/users/register`
 with the following details:
-    "personal_id": `9 numbers`,
-    "first_name": `fname in string`,
-    "last_name": `lname in string`,
-    "birthday": `date in format - 1\1\1`,
-    "marital_status": `enum in format: 'Married', 'Single', 'Divorced', 'Widowed'`
+
+- "personal_id": `9 numbers`,
+- "first_name": `fname in string`,
+- "last_name": `lname in string`,
+- "birthday": `date in format - 1\1\1`,
+- "marital_status": `enum in format: 'Married', 'Single', 'Divorced', 'Widowed'`
 
 ### `Enjoy !`
